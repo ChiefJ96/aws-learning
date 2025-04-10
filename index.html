@@ -1,1 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Quest Kids - Learn AWS</title>
+    <style>
+        :root {
+            --primary: #FF9900;
+            --secondary: #232F3E;
+            --success: #4CAF50;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --white: #ffffff;
+            --border-radius: 12px;
+            --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f2f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: var(--secondary);
+            color: var(--white);
+            padding: 20px 0;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: var(--white);
+            margin-left: 5px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+        
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 16px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--dark);
+        }
+        
+        .btn-primary:hover {
+            background-color: #e68a00;
+            transform: translateY(-2px);
+        }
+        
+        .hero {
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .hero p {
+            font-size: 18px;
+            color: var(--dark);
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .features {
+            padding: 60px 0;
+            background-color: var(--white);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--secondary);
+            font-size: 36px;
+        }
+        
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .card {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: transform 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .card-img {
+            height: 180px;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            color: var(--primary);
+        }
+        
+        .card-content {
+            padding: 20px;
+        }
+        
+        .card h3 {
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+        
+        .card p {
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+        
+        .learn-module {
+            padding: 60px 0;
+            background-color: #f8f9fa;
+        }
+        
+        .module-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .module {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--box-shadow);
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .module:hover {
+            transform: translateX(10px);
+        }
+        
+        .module-icon {
+            font-size: 36px;
+            color: var(--primary);
+            margin-right: 20px;
+            min-width: 60px;
+            text-align: center;
+        }
+        
+        .module-content {
+            flex: 1;
+        }
+        
+        .module h3 {
+            margin-bottom: 5px;
+            color: var(--secondary);
+        }
+        
+        .module p {
+            color: var(--dark);
+        }
+        
+        .module-status {
+            background-color: #e6e6e6;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .status-beginner {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .simulator {
+            padding: 60px 0;
+        }
+        
+        .simulator-container {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+        }
+        
+        .simulator-header {
+            background-color: var(--secondary);
+            color: var(--white);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .simulator-title {
+            font-size: 20px;
+            font-weight: 600;
+        }
+        
+        .simulator-controls {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .control-btn {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            border: none;
+            border-radius: 5px;
+            padding: 8px 15px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .control-btn:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .simulator-body {
+            display: flex;
+            height: 500px;
+        }
+        
+        .simulator-sidebar {
+            width: 250px;
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-right: 1px solid #e1e1e1;
+        }
+        
+        .services-list {
+            list-style: none;
+        }
+        
+        .service-item {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .service-item:hover {
+            background-color: #e9ecef;
+        }
+        
+        .service-item.active {
+            background-color: #e2f3ff;
+            color: #0066cc;
+        }
+        
+        .service-icon {
+            font-size: 24px;
+            color: var(--primary);
+        }
+        
+        .simulator-content {
+            flex: 1;
+            padding: 20px;
+            overflow: auto;
+        }
+        
+        .workspace {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .console-output {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+            font-family: monospace;
+            flex: 1;
+            overflow: auto;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .footer {
+            background-color: var(--secondary);
+            color: var(--white);
+            padding: 40px 0;
+        }
+        
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-column h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: var(--light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: var(--primary);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            color: var(--light);
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            .cards-container {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+            
+            .simulator-body {
+                flex-direction: column;
+                height: auto;
+            }
+            
+            .simulator-sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid #e1e1e1;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .footer-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"></path>
+                </svg>
+                <span>Cloud Quest Kids</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#learn">Learn</a></li>
+                    <li><a href="#practice">Practice</a></li>
+                    <li><a href="#quests">Quests</a></li>
+                    <li><a href="#help">Help</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
+    <section class="hero">
+        <div class="container">
+            <h1>Learn Cloud Computing the Fun Way!</h1>
+            <p>Explore the exciting world of AWS through interactive lessons and hands-on activities designed for young learners. No experience needed!</p>
+            <button class="btn btn-primary">Start Your Adventure</button>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Why Cloud Quest Kids?</h2>
+            <div class="cards-container">
+                <div class="card">
+                    <div class="card-img">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 18h.01"></path>
+                            <path d="M8 7a4 4 0 0 1 8 0v4a4 4 0 0 1-8 0V7z"></path>
+                            <path d="M12 15.5v-1a2 2 0 0 1 2-2 2 2 0 1 0-2-2"></path>
+                        </svg>
+                    </div>
+                    <div class="card-content">
+                        <h3>Kid-Friendly Learning</h3>
+                        <p>Simple explanations and colorful visuals make cloud computing concepts easy to understand.</p>
+                        <button class="btn btn-primary">Explore Lessons</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                        </svg>
+                    </div>
+                    <div class="card-content">
+                        <h3>Hands-On Practice</h3>
+                        <p>Try real cloud operations in our safe, simplified AWS simulator designed for beginners.</p>
+                        <button class="btn btn-primary">Try Simulator</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M8.8 20v-4.1l1.9.2a2.3 2.3 0 0 0 2.164-2.1V8.3A5.37 5.37 0 0 0 2 8.25c0 2.8.656 3.85 1 4.9"></path>
+                            <path d="M21.909 12.84a1.7 1.7 0 0 0-1.209-1.989l-1.292-.214a.24.24 0 0 1-.185-.235v-1.1a.641.641 0 0 0-.643-.637h-1.835a.641.641 0 0 0-.643.634v1.1c0 .123-.094.229-.217.237l-1.146.143a1.7 1.7 0 0 0-1.462 1.8l.059 1.562"></path>
+                            <path d="M13.471 15.124a1.7 1.7 0 0 0-1.255 1.59l.067 3.237"></path>
+                            <path d="M17.952 11.297v3.807"></path>
+                            <path d="M14.456 11.283v3.807"></path>
+                        </svg>
+                    </div>
+                    <div class="card-content">
+                        <h3>Achievement Badges</h3>
+                        <p>Earn cool badges and certificates as you complete challenges and master new skills.</p>
+                        <button class="btn btn-primary">View Badges</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="learn" class="learn-module">
+        <div class="container">
+            <h2 class="section-title">Learning Modules</h2>
+            <div class="module-container">
+                <div class="module">
+                    <div class="module-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 20a6 6 0 0 0-12 0"></path>
+                            <circle cx="12" cy="10" r="4"></circle>
+                            <circle cx="12" cy="12" r="10"></circle>
+                        </svg>
+                    </div>
+                    <div class="module-content">
+                        <h3>What is Cloud Computing?</h3>
+                        <p>Learn what the cloud is and why it's so important in today's world.</p>
+                    </div>
+                    <span class="module-status status-beginner">Beginner</span>
+                </div>
+                <div class="module">
+                    <div class="module-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 6.1H3"></path>
+                            <path d="M21 12.1H3"></path>
+                            <path d="M15.1 18H3"></path>
+                        </svg>
+                    </div>
+                    <div class="module-content">
+                        <h3>AWS Console Basics</h3>
+                        <p>Discover how to navigate the AWS Management Console with ease.</p>
+                    </div>
+                    <span class="module-status status-beginner">Beginner</span>
+                </div>
+                <div class="module">
+                    <div class="module-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect width="20" height="8" x="2" y="2" rx="2" ry="2"></rect>
+                            <rect width="20" height="8" x="2" y="14" rx="2" ry="2"></rect>
+                            <line x1="6" x2="6.01" y1="6" y2="6"></line>
+                            <line x1="6" x2="6.01" y1="18" y2="18"></line>
+                        </svg>
+                    </div>
+                    <div class="module-content">
+                        <h3>Create Your First EC2 Instance</h3>
+                        <p>Set up and manage your first virtual computer in the cloud.</p>
+                    </div>
+                    <span class="module-status status-beginner">Beginner</span>
+                </div>
+                <div class="module">
+                    <div class="module-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16"></path>
+                        </svg>
+                    </div>
+                    <div class="module-content">
+                        <h3>Storage with S3 Buckets</h3>
+                        <p>Learn how to store files and photos in the cloud using S3.</p>
+                    </div>
+                    <span class="module-status status-beginner">Beginner</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="practice" class="simulator">
+        <div class="container">
+            <h2 class="section-title">AWS Practice Simulator</h2>
+            <div class="simulator-container">
+                <div class="simulator-header">
+                    <div class="simulator-title">EC2 Instance Launch Simulator</div>
+                    <div class="simulator-controls">
+                        <button class="control-btn">Reset</button>
+                        <button class="control-btn">Help</button>
+                    </div>
+                </div>
+                <div class="simulator-body">
+                    <div class="simulator-sidebar">
+                        <h3>AWS Services</h3>
+                        <ul class="services-list">
+                            <li class="service-item active">
+                                <span class="service-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect width="20" height="8" x="2" y="2" rx="2" ry="2"></rect>
+                                        <rect width="20" height="8" x="2" y="14" rx="2" ry="2"></rect>
+                                        <line x1="6" x2="6.01" y1="6" y2="6"></line>
+                                        <line x1="6" x2="6.01" y1="18" y2="18"></line>
+                                    </svg>
+                                </span>
+                                EC2
+                            </li>
+                            <li class="service-item">
+                                <span class="service-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16"></path>
+                                    </svg>
+                                </span>
+                                S3
+                            </li>
+                            <li class="service-item">
+                                <span class="service-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="4" x2="4" y1="2" y2="22"></line>
+                                        <line x1="12" x2="12" y1="2" y2="22"></line>
+                                        <line x1="20" x2="20" y1="2" y2="22"></line>
+                                    </svg>
+                                </span>
+                                DynamoDB
+                            </li>
+                            <li class="service-item">
+                                <span class="service-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M12 8V4H8"></path>
+                                        <rect width="16" height="12" x="4" y="8" rx="2"></rect>
+                                        <path d="M2 14h2"></path>
+                                        <path d="M20 14h2"></path>
+                                        <path d="M3.5 10v4"></path>
+                                        <path d="M20.5 10v4"></path>
+                                    </svg>
+                                </span>
+                                Lambda
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="simulator-content">
+                        <div class="workspace">
+                            <h3>Launch an EC2 Instance</h3>
+                            <p>Follow the steps below to create your first virtual server!</p>
+                            
+                            <div>
+                                <h4>Step 1: Choose an Amazon Machine Image (AMI)</h4>
+                                <div style="display: flex; gap: 10px; margin-top: 10px;">
+                                    <div style="border: 2px solid #e9ecef; border-radius: 8px; padding: 15px; width: 180px; text-align: center; cursor: pointer;">
+                                        <div style="font-size: 40px; color: #FF9900;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="m4 6 8-4 8 4"></path>
+                                                <path d="m18 10 4 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-8l4-2"></path>
+                                                <path d="M14 22v-4a2 2 0 0 0-4 0v4"></path>
+                                                <path d="M18 5v17"></path>
+                                                <path d="M6 5v17"></path>
+                                                <circle cx="12" cy="9" r="2"></circle>
+                                            </svg>
+                                        </div>
+                                        <div style="margin-top: 10px;">Amazon Linux</div>
+                                    </div>
+                                    <div style="border: 2px solid #e9ecef; border-radius: 8px; padding: 15px; width: 180px; text-align: center; cursor: pointer;">
+                                        <div style="font-size: 40px; color: #FF9900;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"></path>
+                                                <path d="M12 8v8"></path>
+                                                <path d="M8 12h8"></path>
+                                            </svg>
+                                        </div>
+                                        <div style="margin-top: 10px;">Ubuntu</div>
+                                    </div>
+                                    <div style="border: 2px solid #e9ecef; border-radius: 8px; padding: 15px; width: 180px; text-align: center; cursor: pointer;">
+                                        <div style="font-size: 40px; color: #FF9900;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect>
+                                                <line x1="3" x2="21" y1="9" y2="9"></line>
+                                                <line x1="3" x2="21" y1="15" y2="15"></line>
+                                                <line x1="9" x2="9" y1="3" y2="21"></line>
+                                                <line x1="15" x2="15" y1="3" y2="21"></line>
+                                            </svg>
+                                        </div>
+                                        <div style="margin-top: 10px;">Windows</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h4>Step 2: Choose an Instance Type</h4>
+                                <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
+                                    <div style="border: 2px solid #4CAF50; border-radius: 8px; padding: 10px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; background-color: #f1f8e9;">
+                                        <div>
+                                            <div style="font-weight: bold;">t2.micro</div>
+                                            <div style="font-size: 14px; color: #555;">1 vCPU, 1 GB RAM
